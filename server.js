@@ -26,6 +26,9 @@ app.use(expressValidator());
 // Requiring controllers 
 const post = require('./controllers/posts.js')(app);
 
+// Set db
+require('./data/reddit-db');
+
 // Routes
 app.get('/', (req, res) => {
     res.render('home')
