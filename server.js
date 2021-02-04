@@ -43,3 +43,5 @@ app.get('/posts/new', (req, res) => {
 app.listen(3000, () => {
     console.log('Reddit clone listening on port localhost:3000!');
   });
+
+  module.exports = app;
