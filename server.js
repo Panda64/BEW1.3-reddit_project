@@ -23,20 +23,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(expressValidator());
 
-// Requiring controllers 
-const post = require('./controllers/posts.js')(app);
 
 // Set db
 require('./data/reddit-db');
 
-// Routes
-app.get('/', (req, res) => {
-    res.render('home')
-  })
 
-app.get('/posts/new', (req, res) => {
-    res.render('post-new')
-  })  
+// Requiring controllers 
+const post = require('./controllers/posts.js')(app);
 
 
 // Start Server
