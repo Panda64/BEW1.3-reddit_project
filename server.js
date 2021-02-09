@@ -30,6 +30,7 @@ require('./data/reddit-db');
 
 // Requiring controllers 
 const post = require('./controllers/posts.js')(app);
+const comment = require('./controllers/comments.js')(app);
 
 
 // Start Server
