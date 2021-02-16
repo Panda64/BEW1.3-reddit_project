@@ -50,6 +50,7 @@ require('./data/reddit-db');
 const post = require('./controllers/posts.js')(app);
 const comment = require('./controllers/comments.js')(app);
 const auth = require('./controllers/auth.js')(app);
+const reply = require('./controllers/replies.js')(app);
 
 
 // Start Server
