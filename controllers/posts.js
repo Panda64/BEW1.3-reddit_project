@@ -34,40 +34,42 @@ module.exports = (app) => {
       }
   });
 
-  app.get("/", (req, res) => {
+  app.get('/', (req, res) => {
     var currentUser = req.user;
-  
-    Post.find({}).lean()
-      .then(posts => {
-        res.render("posts-index", { posts, currentUser });
-      })
-      .catch(err => {
+    // res.render('home', {});
+    console.log(req.cookies);
+    Post.find({}).lean().populate('author')
+    .then(posts => {
+        res.render('posts-index', { posts, currentUser });
+        // res.render('home', {});
+    }).catch(err => {
         console.log(err.message);
-      });
-  });
-
-  app.get("/posts/:id", function(req, res) {
-    var currentUser = req.user;
-
-    // LOOK UP THE POST
-    Post.findById(req.params.id).lean().populate('comments').then((post) => {
-      res.render('posts-show', { post, currentUser })
-    }).catch((err) => {
-      console.log(err.message)
+    })
 })
+
+  app.get("/posts/:id", function (req, res) {
+    var currentUser = req.user;
+    // LOOK UP THE POST
+
+    Post.findById(req.params.id).lean().populate('comments').populate('author')
+        .then(post => {
+            res.render("posts-show", { post, currentUser });  
+        })
+        .catch(err => {
+            console.log(err.message);
+        });
   });
 
   // SUBREDDIT
-  app.get("/n/:subreddit", function(req, res) {
+  app.get("/n/:subreddit", function (req, res) {
     var currentUser = req.user;
-
-    Post.find({ subreddit: req.params.subreddit }).lean()
-      .then(posts => {
-        res.render("posts-index", { posts, currentUser });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  });
+    Post.find({ subreddit: req.params.subreddit }).lean().populate('author')
+        .then(posts => {
+            res.render("posts-index", { posts, currentUser });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
 
 };
