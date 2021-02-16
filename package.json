@@ -4,7 +4,7 @@
   "description": "Clone of the website Reddit",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --timeout 10000"
   },
   "author": "Jaylen Schelb",
   "license": "ISC",
